@@ -1,7 +1,7 @@
 # Project Name: Smart Cup
 
-**Student Name:**  'Tommy Condon' \
-**Student ID:**  '20101841'
+**Student Name:**  Tommy Condon \
+**Student ID:**  20101841
 
 *  TODO: Write a short project description..
 
