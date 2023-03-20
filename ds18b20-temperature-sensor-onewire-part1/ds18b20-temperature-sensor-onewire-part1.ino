@@ -6,10 +6,15 @@
 OneWire oneWire(ONE_WIRE_BUS);
 DallasTemperature sensors(&oneWire);
 
+
+// LED Stuff
+int ledPin = 6;
 void setup(void)
 {
   Serial.begin(9600);
   sensors.begin();
+  // put led setup here (regular LED) //
+  pinMode(ledPin,OUTPUT);
 
 }
 
