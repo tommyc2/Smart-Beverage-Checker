@@ -7,14 +7,15 @@ OneWire oneWire(ONE_WIRE_BUS);
 DallasTemperature sensors(&oneWire);
 
 
-// LED Stuff
-int ledPin = 6;
+// LED Pins
+int hotLedPin = 6;
+int goneColdLedPin = 7;
+
 void setup(void)
 {
   Serial.begin(9600);
   sensors.begin();
-  // put led setup here (regular LED) //
-  pinMode(ledPin,OUTPUT);
+  pinMode(hotLedPin,OUTPUT);
 
 }
 
@@ -32,5 +33,19 @@ void loop(void){
   Serial.print('\n');
   Serial.print('\n');
 
-  delay(1000);
+  delay(500);
+
+   //LED Code
+  if (temp >= 80){
+    digitalWrite(hotLedPin,HIGH);
+    Serial.println("Your beverage is at an optimum temperature!: " + temp);
+  }
+  
+  if (temp <= 40{
+  pinMode(goneColdLedPin, HIGH);
+  Serial.println("Your beverage is getting cold!: " + temp);
+  }
+
+
+}
 }
