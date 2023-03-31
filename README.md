@@ -20,3 +20,6 @@
  - Green/Red/Blue LED
  - Resistors
 
+## Sources/References:
+
+1. OneWire & Dallas Temperature Libraries: https://github.com/milesburton/Arduino-Temperature-Control-Library
