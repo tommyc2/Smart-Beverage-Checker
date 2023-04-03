@@ -22,6 +22,8 @@
 
 #define ONE_WIRE_BUS 4
 
+WiFiClient client;
+
 OneWire oneWire(ONE_WIRE_BUS);
 
 DallasTemperature sensors(&oneWire);
@@ -30,6 +32,8 @@ DallasTemperature sensors(&oneWire);
 int hotLedPin = 6;
 int goneColdLedPin = 8;
 int tempJustFineLedPin = 1;
+
+String lastMessage = "";
 
 void setup() {
 
@@ -52,6 +56,8 @@ void setup() {
   ArduinoCloud.printDebugInfo();
 }
 
+
+// Loop Method
 void loop() {
   ArduinoCloud.update();
   
@@ -67,16 +73,21 @@ void loop() {
 
   Serial.print('\n');
 
-
   // If temperature above threshold, turn on red LED only
   if (temp >= thresholdValue) {
     digitalWrite(hotLedPin, HIGH);
     digitalWrite(goneColdLedPin, LOW);
-     digitalWrite(tempJustFineLedPin,LOW);
+    digitalWrite(tempJustFineLedPin,LOW);
     messageIndicator = "Your beverage is piping hot! Be careful!";
     Serial.print(messageIndicator);
-    Serial.println(temp);
-  }
+    
+    if (messageIndicator != lastMessage){
+      iftttSend();
+    }
+    lastMessage = messageIndicator;
+    
+    }
+  
 
   // If temperature is between a hot range of 50 to threshold for example, then turn on yellow LED
   else if ((temp >= thresholdValue-7) && (temp < thresholdValue)){
@@ -85,8 +96,12 @@ void loop() {
     digitalWrite(tempJustFineLedPin,HIGH);
     messageIndicator = "Your beverage is just fine.";
     Serial.print(messageIndicator);
-    Serial.println(temp);
-  }
+    if (messageIndicator != lastMessage){
+      iftttSend();
+    }
+    lastMessage = messageIndicator;
+    }
+
 
   // Otherwise, turn on blue LED only
   else {
@@ -95,7 +110,10 @@ void loop() {
     digitalWrite(tempJustFineLedPin,LOW);
     messageIndicator = "Your beverage is getting cold! Heat it up!!";
     Serial.print(messageIndicator);
-    Serial.println(temp);
+    if (messageIndicator != lastMessage){
+      iftttSend();
+    }
+    lastMessage = messageIndicator;
   }
 
 
@@ -103,6 +121,32 @@ void loop() {
   delay(1000);
 
 }
+
+
+//---------------------------- //
+// ----- IFTTT Function ------ //
+//---------------------------- //
+void iftttSend() {
+
+char server[] = "maker.ifttt.com";
+Serial.println("Alarm triggered !");
+  
+// Connection to the server IFTTT
+  Serial.println("Starting connection to server...");
+  if (client.connectSSL(server,443)) {
+    Serial.println("Connected to server IFTTT, ready to trigger alarm...");
+    // Make a HTTP request:
+    client.println("GET /trigger/TooCold/with/key/dkxBdXi0w4WsBYOWZEO7jQ HTTP/1.1");
+    client.println("Host: maker.ifttt.com");
+    client.println();
+    Serial.println("IFTTT alarm triggered!");
+  }
+  else {
+    Serial.println("Connection at IFTTT failed");
+  }
+  
+ }
+
 
 void onThresholdValueChange()  {
 // dummy method to keep editor happy
@@ -116,3 +160,8 @@ void onTempChange()  {
 void onMessageIndicatorChange()  {
 // dummy method to keep editor happy
 }
+
+
+
+
+
