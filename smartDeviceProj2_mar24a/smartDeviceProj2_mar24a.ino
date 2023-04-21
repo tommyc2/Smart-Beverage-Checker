@@ -33,7 +33,6 @@ int hotLedPin = 6;
 int goneColdLedPin = 8;
 int tempJustFineLedPin = 1;
 
-String lastMessage = "";
 
 void setup() {
 
@@ -81,10 +80,10 @@ void loop() {
     messageIndicator = "Your beverage is piping hot! Be careful!";
     Serial.print(messageIndicator);
     
-    if (messageIndicator != lastMessage){
-      iftttSend();
-    }
-    lastMessage = messageIndicator;
+//    if (messageIndicator != lastMessage){
+//      iftttSend();
+//    }
+//    lastMessage = messageIndicator;
     
     }
   
@@ -96,10 +95,10 @@ void loop() {
     digitalWrite(tempJustFineLedPin,HIGH);
     messageIndicator = "Your beverage is just fine.";
     Serial.print(messageIndicator);
-    if (messageIndicator != lastMessage){
-      iftttSend();
-    }
-    lastMessage = messageIndicator;
+ //   if (messageIndicator != lastMessage){
+//      iftttSend();
+//    }
+//    lastMessage = messageIndicator;
     }
 
 
@@ -110,10 +109,13 @@ void loop() {
     digitalWrite(tempJustFineLedPin,LOW);
     messageIndicator = "Your beverage is getting cold! Heat it up!!";
     Serial.print(messageIndicator);
-    if (messageIndicator != lastMessage){
-      iftttSend();
-    }
-    lastMessage = messageIndicator;
+    
+    // Apply get request calling ifttt function for applet
+   // if (messageIndicator != lastMessage){
+   // iftttSend();
+    //}
+    // Making sure previous too cold message doesn't repeatedly send same message
+    //lastMessage = messageIndicator;
   }
 
 
@@ -124,9 +126,10 @@ void loop() {
 
 
 //---------------------------- //
-// ----- IFTTT Function ------ //
+// ----- IFTTT Function Test ------ //
 //---------------------------- //
-void iftttSend() {
+
+/* void iftttSend() {
 
 char server[] = "maker.ifttt.com";
 Serial.println("Alarm triggered !");
@@ -136,7 +139,7 @@ Serial.println("Alarm triggered !");
   if (client.connectSSL(server,443)) {
     Serial.println("Connected to server IFTTT, ready to trigger alarm...");
     // Make a HTTP request:
-    client.println("GET /trigger/TooCold/with/key/dkxBdXi0w4WsBYOWZEO7jQ HTTP/1.1");
+    client.println("GET /trigger/too_cold_temp_1/with/key/dkxBdXi0w4WsBYOWZEO7jQ HTTP/1.1");
     client.println("Host: maker.ifttt.com");
     client.println();
     Serial.println("IFTTT alarm triggered!");
@@ -145,7 +148,7 @@ Serial.println("Alarm triggered !");
     Serial.println("Connection at IFTTT failed");
   }
   
- }
+ } */
 
 
 void onThresholdValueChange()  {
@@ -160,6 +163,13 @@ void onTempChange()  {
 void onMessageIndicatorChange()  {
 // dummy method to keep editor happy
 }
+
+
+
+
+
+
+
 
 
 

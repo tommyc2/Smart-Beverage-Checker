@@ -4,6 +4,15 @@
     "name": "Arduino MKR1000",
     "type": "serial"
   },
-  "secrets": [],
+  "secrets": [
+    {
+      "name": "SECRET_OPTIONAL_PASS",
+      "value": ""
+    },
+    {
+      "name": "SECRET_SSID",
+      "value": ""
+    }
+  ],
   "included_libs": []
 }
