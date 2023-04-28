@@ -29,7 +29,7 @@ OneWire oneWire(ONE_WIRE_BUS);
 
 DallasTemperature sensors(&oneWire);
 
-// Defining LED Pins
+// Creating LED Pins
 int hotLedPin = 6;
 int goneColdLedPin = 8;
 int tempJustFineLedPin = 1;
