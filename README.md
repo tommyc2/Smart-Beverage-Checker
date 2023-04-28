@@ -4,7 +4,7 @@
 **Student ID:**  20101841
 
 ## Description
- - Concept: Waterproof Temperature Sensor Device that alerts you when your hot beverage is cold. When the temperature sensor reaches a certain temperature (low enough), the blue LED turns on to alert the user, signalling their drink is gone cold or the surrounding area is cold. Can be used for a mug to signal drink temperature.
+ - Concept: Waterproof Temperature Sensor Device that alerts you when your hot beverage is cold. When the temperature sensor reaches a certain temperature (low enough), the blue LED turns on to alert the user, signalling their drink is gone cold or the surrounding area is cold. Can be used for a mug to signal drink temperature. When the temperature is between a certain set of values, a yellow LED displays signalling the temperature is stable.
 
  Web view: https://tommyc2.github.io/project2/
 
@@ -19,6 +19,7 @@
  - Breadboard
  - Green/Red/Blue LED
  - Resistors
+ - USB cable
 
 ## Sources/References:
 
