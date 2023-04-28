@@ -1,4 +1,4 @@
-# Project Name: Smart Temperature Device for beverages
+# Project Name: Smart Beverage Temperature Checker
 
 **Student Name:**  Tommy Condon \
 **Student ID:**  20101841
