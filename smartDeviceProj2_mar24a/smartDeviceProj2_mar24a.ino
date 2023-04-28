@@ -23,6 +23,7 @@
 #define ONE_WIRE_BUS 4
 
 WiFiClient client;
+const char kHostname[] = "88.80.186.240";
 
 OneWire oneWire(ONE_WIRE_BUS);
 
@@ -33,6 +34,7 @@ int hotLedPin = 6;
 int goneColdLedPin = 8;
 int tempJustFineLedPin = 1;
 
+String lastMessage = "";
 
 void setup() {
 
@@ -79,26 +81,16 @@ void loop() {
     digitalWrite(tempJustFineLedPin,LOW);
     messageIndicator = "Your beverage is piping hot! Be careful!";
     Serial.print(messageIndicator);
-    
-//    if (messageIndicator != lastMessage){
-//      iftttSend();
-//    }
-//    lastMessage = messageIndicator;
-    
     }
   
 
   // If temperature is between a hot range of 50 to threshold for example, then turn on yellow LED
-  else if ((temp >= thresholdValue-7) && (temp < thresholdValue)){
+  else if ((temp >= thresholdValue-7) && (temp < thresholdValue)) {
     digitalWrite(goneColdLedPin, LOW);
     digitalWrite(hotLedPin, LOW);
     digitalWrite(tempJustFineLedPin,HIGH);
-    messageIndicator = "Your beverage is just fine.";
+    messageIndicator = "Your beverage temperature is just fine.";
     Serial.print(messageIndicator);
- //   if (messageIndicator != lastMessage){
-//      iftttSend();
-//    }
-//    lastMessage = messageIndicator;
     }
 
 
@@ -110,46 +102,35 @@ void loop() {
     messageIndicator = "Your beverage is getting cold! Heat it up!!";
     Serial.print(messageIndicator);
     
-    // Apply get request calling ifttt function for applet
-   // if (messageIndicator != lastMessage){
-   // iftttSend();
-    //}
-    // Making sure previous too cold message doesn't repeatedly send same message
-    //lastMessage = messageIndicator;
+    if (messageIndicator != lastMessage){
+      iftttSend();
+    }
+    
   }
-
+  lastMessage = messageIndicator;
 
   // Delay
   delay(1000);
 
 }
 
+// IFTTT Function //
 
-//---------------------------- //
-// ----- IFTTT Function Test ------ //
-//---------------------------- //
-
-/* void iftttSend() {
-
-char server[] = "maker.ifttt.com";
-Serial.println("Alarm triggered !");
-  
-// Connection to the server IFTTT
+void iftttSend() {
+  Serial.println("Alarm triggered !");
   Serial.println("Starting connection to server...");
-  if (client.connectSSL(server,443)) {
+  if (client.connect(kHostname,3000)) {
     Serial.println("Connected to server IFTTT, ready to trigger alarm...");
-    // Make a HTTP request:
-    client.println("GET /trigger/too_cold_temp_1/with/key/dkxBdXi0w4WsBYOWZEO7jQ HTTP/1.1");
-    client.println("Host: maker.ifttt.com");
+    
+    // Proxy with event name and key
+    client.println("GET /prox/TooCold/g6YrvqBSrTq2owf_MZheGK_yF5IL3xGHFaSaKngEE1k HTTP/1.1"); 
     client.println();
-    Serial.println("IFTTT alarm triggered!");
+    Serial.println("IFTTT alarm triggered !");
   }
   else {
     Serial.println("Connection at IFTTT failed");
   }
-  
- } */
-
+}
 
 void onThresholdValueChange()  {
 // dummy method to keep editor happy
@@ -163,6 +144,12 @@ void onTempChange()  {
 void onMessageIndicatorChange()  {
 // dummy method to keep editor happy
 }
+
+
+
+
+
+
 
 
 
