@@ -1,4 +1,4 @@
-# Project Name: Smart Cup
+# Project Name: Smart Temperature Device for beverages
 
 **Student Name:**  Tommy Condon \
 **Student ID:**  20101841
@@ -7,7 +7,7 @@
 https://tommyc2.github.io/project2/
 
 ## Description
- - Concept: Waterproof Temperature Sensor Device that alerts you when your hot beverage is cold/hot. When the temperature sensor reaches a certain temperature (low enough), the blue LED turns on to alert the user, signalling their drink is gone cold or the surrounding area is cold. When the temperature is between a certain set of values, a yellow LED displays signalling the temperature is stable. When the temperature is above a cloud "threshold" value, the red LED comes on signalling the drink is hot.
+ - Concept: Smart Beverage Temp checker device that alerts you when your drink is cold/hot. When the temperature sensor reaches a low temperature, the blue LED turns on to alert the user, signalling their drink is gone cold with an email notification. When the temperature is between the threshold and a reduced value, a yellow LED displays signalling the temperature is stable. When the temperature is above the threshold value, the red LED comes on signalling the drink is hot.
 
 ## Tools, Technologies and Equipment:
 
