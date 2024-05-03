@@ -1,8 +1,5 @@
 # Smart Beverage Temperature Checker
 
-**Student Name:**  Tommy Condon \
-**Student ID:**  20101841
-
 ## Website: 
 https://tommyc2.github.io/project2/
 
@@ -11,11 +8,15 @@ https://tommyc2.github.io/project2/
 
 ## Tools, Technologies and Equipment:
 
- Programming Languages: Arduino C++ & HTML
+ ### Programming Languages
+ - Arduino C++ 
+ - HTML/CSS
 
- - Temperature sensor DS18B20
- - Wires
- - Arduino MKR1000
+### Equipment
+
+ - Waterproof temperature sensor (DS18B20)
+ - Jumper wires
+ - Arduino MKR1000 microcontroller
  - Breadboard
  - Yellow/Red/Blue LEDs
  - Resistors
